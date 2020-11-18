@@ -15,12 +15,17 @@ export class StoryService {
   }
 
   getNonFinishedStories(): Promise<Story[]> {
-    const url = '';
+    const url = 'http://localhost:3000/stories/30';
     return this.requestService.getAll(url);
   }
 
   getFinishedStories(): Promise<Story[]> {
-    const url = '';
+    const url = 'http://localhost:3000/stories-end/30';
     return this.requestService.getAll(url);
+  }
+
+  getStoryById(id: any): Promise<Story> {
+    const url = 'http://localhost:3000/story/' + id;
+    return this.requestService.get(url);
   }
 }

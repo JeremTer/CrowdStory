@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ContentService} from '../../services/content.service';
 import {Content} from '../../models/Content';
+import {StoryService} from '../../services/story.service';
+import {ActivatedRoute} from '@angular/router';
+import {Story} from '../../models/Story';
 
 @Component({
   selector: 'app-story-editor',
@@ -9,7 +12,7 @@ import {Content} from '../../models/Content';
 })
 export class StoryEditorComponent implements OnInit {
 
-  story = {name: 'test', theme: 'fantastique', iteration: 0};
+  story: Story = {id: 0, name: 'test', theme: 'fantastique', iteration: 0};
 
   children: Content[] = [
     {id: 1, text: 'abc'},
@@ -27,9 +30,17 @@ export class StoryEditorComponent implements OnInit {
   };
   remainingCharacters = 180;
 
-  constructor(private contentService: ContentService) { }
+  constructor(private contentService: ContentService,
+              private route: ActivatedRoute,
+              private storyService: StoryService) { }
 
   ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.storyService.getStoryById(id).then(result => this.story = result[0]);
+    this.contentService.getStoryContents(id).then(result => {
+      this.children = result;
+    });
+
   }
 
   saveContent(): void {

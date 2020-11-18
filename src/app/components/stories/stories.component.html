@@ -15,5 +15,5 @@
   </ng-container>
 <!--  <mat-row  *matRowDef="let obj; columns: displayedColumns;" (click)="test(obj)"></mat-row>-->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row  class="example-element-row" *matRowDef="let row; columns: displayedColumns;" (click)="rowClicked(row)"></tr>
+  <tr mat-row  class="example-element-row" *matRowDef="let row; columns: displayedColumns;" [routerLink]="'editor/' + row.id" (click)="rowClicked(row)"></tr>
 </table>

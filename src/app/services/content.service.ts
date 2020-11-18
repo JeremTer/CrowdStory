@@ -12,12 +12,12 @@ export class ContentService {
 
   saveChildOfContent(content: Content, newContent: string ): void {
     const finalContent = content.text += newContent;
-    const url = '';
+    const url = 'http://localhost:3000/content-child/' + content.id;
     this.requestService.save(url, {text: finalContent});
   }
 
-  getStoryContents(storyId): void {
-    const url = '';
-    this.requestService.getAll(url);
+  getStoryContents(storyId): Promise<Content[]> {
+    const url = 'http://localhost:3000/contents/' + storyId;
+    return this.requestService.getAll(url);
   }
 }

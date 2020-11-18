@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {StoryService} from '../../services/story.service';
+import {Story} from '../../models/Story';
+import {log} from 'util';
 
 @Component({
   selector: 'app-stories',
@@ -8,13 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class StoriesComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'theme', 'itération'];
-  constructor() {
+  stories: Story[] = [];
+
+  constructor(private storyService: StoryService) {
   }
-  stories: any[] = [];
 
   ngOnInit(): void {
-    this.stories.push({name: 'test', theme: 'fantastique', iteration: 0});
-    this.stories.push({name: 'tes2t', theme: 'fantastique', iteration: 15});
+    this.storyService.getNonFinishedStories().then(result => this.stories = result).catch(err => log(err));
   }
 
   rowClicked($event): void {

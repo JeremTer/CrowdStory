@@ -4,7 +4,7 @@
 <div style="margin: 80px">
   <mat-tab-group [(selectedIndex)]="currentIndex" style="height: 300px;border-width: 2px;border-style: solid;border-color: darkgrey">
     <mat-tab *ngFor="let child of children,let index = index" label="Proposition {{index + 1}}" style="height: 300px">
-      {{child.text}}
+      <div [innerHTML]="child.text"></div>
     </mat-tab>
   </mat-tab-group>
 

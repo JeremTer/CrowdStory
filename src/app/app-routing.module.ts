@@ -6,7 +6,7 @@ import {StoryEditorComponent} from './components/story-editor/story-editor.compo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'editor', component: StoryEditorComponent}
+  { path: 'editor/:id', component: StoryEditorComponent}
 ];
 
 @NgModule({

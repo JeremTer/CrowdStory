@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {StoryService} from '../../services/story.service';
 
 @Component({
   selector: 'app-create-story',
@@ -10,7 +11,8 @@ export class CreateStoryComponent implements OnInit {
 
   createStoryForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private storyService: StoryService) {
   }
 
   ngOnInit(): void {
