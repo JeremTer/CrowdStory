@@ -1,0 +1,11 @@
+<div class="form-container">
+  <form [formGroup]="createStoryForm" (submit)="submit()">
+    <mat-form-field class="form-field" appearance="standard">
+      <input matInput placeholder="Thème" formControlName="theme" required>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="standard">
+      <input matInput placeholder="Titre" formControlName="title" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Créer une histoire</button>
+  </form>
+</div>
