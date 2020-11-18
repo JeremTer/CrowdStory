@@ -3,11 +3,17 @@
 
 <div style="margin: 80px">
   <mat-tab-group [(selectedIndex)]="currentIndex" style="height: 300px;border-width: 2px;border-style: solid;border-color: darkgrey">
-    <mat-tab *ngFor="let child of children,let index = index" label="Proposition {{index + 1}}" style="height: 300px">
-      <div [innerHTML]="child.text"></div>
-    </mat-tab>
+    <div *ngIf="children.length === 5">
+      <mat-tab *ngFor="let child of children,let index = index" label="Proposition {{index + 1}}" style="height: 300px">
+          <div [innerHTML]="child.text"></div>
+        </mat-tab>
+    </div>
+    <div *ngIf="children.length < 5">
+      <mat-tab label="Début de l'histoire" style="height: 300px">
+      L'histoire n'a pas encore commencé, vous pouvez faire une proposition de départ !
+      </mat-tab>
+    </div>
   </mat-tab-group>
-
   <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="newContent" [config]="editorConfig" (ngModelChange)="onContentChange()"></angular-editor>
 
   <div style="width: 100%;display: block">

@@ -18,6 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AngularEditorModule,
     FormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

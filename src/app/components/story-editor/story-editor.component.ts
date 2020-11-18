@@ -40,11 +40,19 @@ export class StoryEditorComponent implements OnInit {
   }
 
   saveContent(): void {
-    this.contentService.saveChildOfContent(this.children[this.currentIndex], this.newContent).then(
-      () => {
-        this.navigation.navigateByUrl('');
-      }
-    ).catch(e=> this.navigation.navigateByUrl(''));
+    if (this.children.length < 5) {
+      this.contentService.saveContentOfStory(this.story.id, this.newContent).then(
+        () => {
+          this.navigation.navigateByUrl('');
+        }
+      ).catch(e => this.navigation.navigateByUrl(''));
+    } else {
+      this.contentService.saveChildOfContent(this.children[this.currentIndex], this.newContent).then(
+        () => {
+          this.navigation.navigateByUrl('');
+        }
+      ).catch(e => this.navigation.navigateByUrl(''));
+    }
   }
 
   onContentChange(): void {
@@ -72,6 +80,6 @@ export class StoryEditorComponent implements OnInit {
   canSaveContent(): boolean {
     let trimContent = this.newContent;
     trimContent = trimContent.replace(/<[^>]*>/g, '');
-    return !(trimContent.length <= 180 && this.currentIndex != null);
+    return !(trimContent.length <= 180);
   }
 }

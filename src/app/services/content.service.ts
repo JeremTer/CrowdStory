@@ -20,4 +20,9 @@ export class ContentService {
     const url = 'http://localhost:3000/contents/' + storyId;
     return this.requestService.getAll(url);
   }
+
+  saveContentOfStory(id: number, newContent: string): Promise<any> {
+    const url = 'http://localhost:3000/content/' + id;
+    return this.requestService.save(url, {text: newContent});
+  }
 }
