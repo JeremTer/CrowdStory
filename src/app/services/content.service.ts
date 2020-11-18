@@ -10,10 +10,10 @@ export class ContentService {
   constructor(private requestService: RequestService) { }
 
 
-  saveChildOfContent(content: Content, newContent: string ): void {
-    const finalContent = content.text += newContent;
+  saveChildOfContent(content: Content, newContent: string ): Promise<any> {
+    const finalContent = content.text + newContent;
     const url = 'http://localhost:3000/content-child/' + content.id;
-    this.requestService.save(url, {text: finalContent});
+    return this.requestService.save(url, {text: finalContent});
   }
 
   getStoryContents(storyId): Promise<Content[]> {

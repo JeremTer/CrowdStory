@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ContentService} from '../../services/content.service';
 import {Content} from '../../models/Content';
 import {StoryService} from '../../services/story.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Story} from '../../models/Story';
+import {log} from 'util';
 
 @Component({
   selector: 'app-story-editor',
@@ -12,15 +13,9 @@ import {Story} from '../../models/Story';
 })
 export class StoryEditorComponent implements OnInit {
 
-  story: Story = {id: 0, name: 'test', theme: 'fantastique', iteration: 0};
+  story: Story = {id: 0, name: '', theme: '', iteration: 0};
 
-  children: Content[] = [
-    {id: 1, text: 'abc'},
-    {id: 2, text: 'abcd'},
-    {id: 3, text: 'abec'},
-    {id: 4, text: 'abazzc'},
-    {id: 5, text: 'abfzefzec'},
-  ];
+  children: Content[] = [];
 
   currentIndex = 0;
 
@@ -32,7 +27,8 @@ export class StoryEditorComponent implements OnInit {
 
   constructor(private contentService: ContentService,
               private route: ActivatedRoute,
-              private storyService: StoryService) { }
+              private storyService: StoryService,
+              private navigation: Router) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -44,7 +40,11 @@ export class StoryEditorComponent implements OnInit {
   }
 
   saveContent(): void {
-    this.contentService.saveChildOfContent(this.children[this.currentIndex], this.newContent);
+    this.contentService.saveChildOfContent(this.children[this.currentIndex], this.newContent).then(
+      () => {
+        this.navigation.navigateByUrl('');
+      }
+    ).catch(e=> this.navigation.navigateByUrl(''));
   }
 
   onContentChange(): void {
