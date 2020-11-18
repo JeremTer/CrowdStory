@@ -9,9 +9,9 @@ export class StoryService {
 
   constructor(private requestService: RequestService) { }
 
-  createStory(story: Story): void {
-    const url = '';
-    this.requestService.save(url, story);
+  createStory(story: Story): Promise<any> {
+    const url = 'http://localhost:3000/story';
+    return this.requestService.save(url, story);
   }
 
   getNonFinishedStories(): Promise<Story[]> {
