@@ -7,11 +7,18 @@ import { HomeComponent } from './components/home/home.component';
 import { CreateStoryComponent } from './components/create-story/create-story.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import { StoryEditorComponent } from './components/story-editor/story-editor.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AppRoutingModule } from './app-routing.module';
+import {MatButtonModule} from '@angular/material/button';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule} from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +35,14 @@ import { StoryEditorComponent } from './components/story-editor/story-editor.com
     MatFormFieldModule,
     ReactiveFormsModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    AppRoutingModule,
+    MatButtonModule,
+    AngularEditorModule,
+    FormsModule,
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

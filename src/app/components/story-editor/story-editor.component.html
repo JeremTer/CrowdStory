@@ -1,0 +1,21 @@
+<h2 style="text-align: center"> {{story.name}} </h2>
+<h3  style="text-align: center"> {{story.theme}} </h3>
+
+<div style="margin: 80px">
+  <mat-tab-group [(selectedIndex)]="currentIndex" style="height: 300px;border-width: 2px;border-style: solid;border-color: darkgrey">
+    <mat-tab *ngFor="let child of children,let index = index" label="Proposition {{index + 1}}" style="height: 300px">
+      {{child.content}}
+    </mat-tab>
+  </mat-tab-group>
+
+  <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="newContent" [config]="editorConfig" (ngModelChange)="onContentChange()"></angular-editor>
+
+  <div style="width: 100%;display: block">
+
+    <button mat-raised-button color="primary" (click)="SaveContent()" style="width: 8%; display: inline-block">Valider</button>
+    <div style="width: 25%; display: inline-block"></div>
+    <mat-progress-bar mode="determinate" [value]="(remainingCharacters/180)*100" style="width: 40%; display: inline-block"></mat-progress-bar>
+    <div style="width: 5%; display: inline-block"></div>
+    <div style="display: inline-block"> Characteres restants : {{remainingCharacters}}</div>
+  </div>
+</div>
