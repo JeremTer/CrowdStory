@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ContentService} from '../../services/content.service';
+import {Content} from '../../models/Content';
 
 @Component({
   selector: 'app-story-editor',
@@ -9,12 +11,12 @@ export class StoryEditorComponent implements OnInit {
 
   story = {name: 'test', theme: 'fantastique', iteration: 0};
 
-  children = [
-    {id: 1, content: 'abc'},
-    {id: 2, content: 'abcd'},
-    {id: 3, content: 'abec'},
-    {id: 4, content: 'abazzc'},
-    {id: 5, content: 'abfzefzec'},
+  children: Content[] = [
+    {id: 1, text: 'abc'},
+    {id: 2, text: 'abcd'},
+    {id: 3, text: 'abec'},
+    {id: 4, text: 'abazzc'},
+    {id: 5, text: 'abfzefzec'},
   ];
 
   currentIndex = 0;
@@ -25,26 +27,40 @@ export class StoryEditorComponent implements OnInit {
   };
   remainingCharacters = 180;
 
-  constructor() { }
+  constructor(private contentService: ContentService) { }
 
   ngOnInit(): void {
   }
 
-  SaveContent(): void {
-    console.log(this.children[this.currentIndex]);
-    console.log(this.newContent);
-    this.remainingCharacters -= 5;
+  saveContent(): void {
+    this.contentService.saveChildOfContent(this.children[this.currentIndex], this.newContent);
   }
 
   onContentChange(): void {
     let trimContent = this.newContent;
     trimContent = trimContent.replace(/<[^>]*>/g, '');
 
-
-    if (trimContent.length < 180) {
+    if (trimContent.length <= 180) {
       this.remainingCharacters = 180 - trimContent.length;
     } else {
-      //bloquer la validation
+      this.remainingCharacters = 0;
     }
+  }
+
+  getColorProgress(): string {
+    let trimContent = this.newContent;
+    trimContent = trimContent.replace(/<[^>]*>/g, '');
+    return trimContent.length <= 180 ? 'primary' : 'warn';
+  }
+  getContentInformations(): string {
+    let trimContent = this.newContent;
+    trimContent = trimContent.replace(/<[^>]*>/g, '');
+    return trimContent.length <= 180 ? 'Caractères  restants : ' + this.remainingCharacters : (trimContent.length - 180) + ' caractères en trop';
+  }
+
+  canSaveContent(): boolean {
+    let trimContent = this.newContent;
+    trimContent = trimContent.replace(/<[^>]*>/g, '');
+    return !(trimContent.length <= 180 && this.currentIndex != null);
   }
 }

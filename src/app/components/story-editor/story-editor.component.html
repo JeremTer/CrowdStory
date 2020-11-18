@@ -4,7 +4,7 @@
 <div style="margin: 80px">
   <mat-tab-group [(selectedIndex)]="currentIndex" style="height: 300px;border-width: 2px;border-style: solid;border-color: darkgrey">
     <mat-tab *ngFor="let child of children,let index = index" label="Proposition {{index + 1}}" style="height: 300px">
-      {{child.content}}
+      {{child.text}}
     </mat-tab>
   </mat-tab-group>
 
@@ -12,10 +12,10 @@
 
   <div style="width: 100%;display: block">
 
-    <button mat-raised-button color="primary" (click)="SaveContent()" style="width: 8%; display: inline-block">Valider</button>
+    <button mat-raised-button color="primary" [disabled]="canSaveContent()" (click)="saveContent()" style="width: 8%; display: inline-block">Valider</button>
     <div style="width: 25%; display: inline-block"></div>
-    <mat-progress-bar mode="determinate" [value]="(remainingCharacters/180)*100" style="width: 40%; display: inline-block"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [color]="getColorProgress()" [value]="(remainingCharacters/180)*100" style="width: 40%; display: inline-block"></mat-progress-bar>
     <div style="width: 5%; display: inline-block"></div>
-    <div style="display: inline-block"> Characteres restants : {{remainingCharacters}}</div>
+    <div style="display: inline-block"> {{ getContentInformations() }}</div>
   </div>
 </div>
