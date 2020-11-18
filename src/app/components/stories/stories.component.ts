@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoriesComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['name', 'theme', 'itération'];
+  constructor() {
+  }
+  stories: any[] = [];
 
   ngOnInit(): void {
+    this.stories.push({name: 'test', theme: 'fantastique', iteration: 0});
+    this.stories.push({name: 'tes2t', theme: 'fantastique', iteration: 15});
   }
 
+  rowClicked($event): void {
+    console.log($event);
+  }
 }
