@@ -19,6 +19,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { FinishedStoryComponent } from './components/finished-story/finished-story.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CommonModule } from '@angular/common';
     HomeComponent,
     CreateStoryComponent,
     StoriesComponent,
-    StoryEditorComponent
+    StoryEditorComponent,
+    FinishedStoryComponent
   ],
   imports: [
     BrowserModule,

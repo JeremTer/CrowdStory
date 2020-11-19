@@ -12,12 +12,14 @@ export class StoriesComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'theme', 'itération'];
   stories: Story[] = [];
+  storiesFinished: Story[] = [];
 
   constructor(private storyService: StoryService) {
   }
 
   ngOnInit(): void {
     this.storyService.getNonFinishedStories().then(result => this.stories = result).catch(err => log(err));
+    this.storyService.getFinishedStories().then(result => this.storiesFinished = result).catch(err => log(err));
   }
 
   rowClicked($event): void {

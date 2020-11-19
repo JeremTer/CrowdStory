@@ -1,5 +1,4 @@
-<p>Liste des histoires</p>
-
+<h2>Continuer une histoire existante</h2>
 <table mat-table [dataSource]="stories" class="mat-table" multiTemplateDataRows="true">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Nom </th>
@@ -16,4 +15,24 @@
 <!--  <mat-row  *matRowDef="let obj; columns: displayedColumns;" (click)="test(obj)"></mat-row>-->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row  class="example-element-row" *matRowDef="let row; columns: displayedColumns;" [routerLink]="'editor/' + row.id" (click)="rowClicked(row)"></tr>
+</table>
+
+<h2>Lire une histoire fini</h2>
+
+<table mat-table [dataSource]="storiesFinished" class="mat-table" multiTemplateDataRows="true">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="theme">
+    <th mat-header-cell *matHeaderCellDef> Theme </th>
+    <td mat-cell *matCellDef="let element"> {{element.theme}} </td>
+  </ng-container>
+  <ng-container matColumnDef="itération">
+    <th mat-header-cell *matHeaderCellDef> Itération </th>
+    <td mat-cell *matCellDef="let element"> {{element.iteration}} </td>
+  </ng-container>
+  <!--  <mat-row  *matRowDef="let obj; columns: displayedColumns;" (click)="test(obj)"></mat-row>-->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row  class="example-element-row" *matRowDef="let row; columns: displayedColumns;" [routerLink]="'view/' + row.id" (click)="rowClicked(row)"></tr>
 </table>
